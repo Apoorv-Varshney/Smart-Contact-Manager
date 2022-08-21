@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+	th:replace="user/user_base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>profile Page</title>
+</head>
+<body>
+	<section>
+		<div th:classappend="${'alert-'+session.message.type}"
+			class="alert text-center mr-4 ml-4" style="border-radius: 0.5rem;"
+			role="alert" th:if="${session.message}">
+
+			<span th:text="${session.message.content}"></span>
+			<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+		</div>
+
+
+		<div class="container">
+			<div class="card mr-4 ml-4" style="border-radius: 0.5rem;">
+
+				<div class="card-body text-center">
+					<h1 class="text-center mt-2">User Profile</h1>
+					<div class="container text-center">
+						<img style="height: 150px; width: 150px; border-radius: 50%;"
+							th:src="@{'/images/'+${user.image}}" alt="contact" />
+					</div>
+					<div class="text-center mt-2 mb-2">
+						<h3>
+							<span th:text="${user.name}"></span>
+						</h3>
+					</div>
+
+					<div class="table-responsive">
+
+						<table class="table table-striped text-center">
+							<thead>
+								<tr>
+									<th scope="col">#USERID</th>
+									<th scope="col"><span th:text="${user.id}"></span></th>
+								</tr>
+							</thead>
+							<tr>
+								<th scope="row">Email Address</th>
+								<td><span th:text="${user.email}"></span></td>
+							</tr>
+
+							<tr>
+								<th scope="row">Role</th>
+								<td><span th:text="${user.role}"></span></td>
+							</tr>
+
+							<tr>
+								<th scope="row">About</th>
+								<td><span th:text="${user.about}"></span></td>
+							</tr>
+
+							<tr>
+								<th scope="row">User Active</th>
+								<td><span th:text="${user.enabled}"></span></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="buttons btn-group">
+
+						<form method="post" th:action="@{'/user/user_update/'+${user.id}}">
+							<button type="submit" class="btn btn-primary btn-sm">Update</button>
+						</form>
+						<a th:href="@{'/user/user_delete/'+${user.id}}"
+							class="btn btn-danger btn-sm ml-3 text-white">Delete</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script>
+		$(document).ready(() => {
+			$(".item").removeClass("active");
+			$("#profile").addClass("active");
+		});
+		</script>
+		
+	</section>
+</body>
+</html>

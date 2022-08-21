@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+	th:replace="user/user_base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>Contact Page</title>
+</head>
+<body>
+	<section>
+		<div class="card mr-4 ml-4" style="border-radius: 0.5rem;"
+			th:if="${contactDetail}">
+
+			<div class="card-body">
+
+				<h1 class="text-center">Contacts Details</h1>
+
+				<div class="container text-center">
+					<img style="height: 150px; width: 150px; border-radius: 50%;"
+						th:src="@{'/images/'+${contactDetail.image}}" alt="contact" />
+
+					<h3 class="m-3">
+						<span th:text="${contactDetail.name}"></span> ( <span
+							th:text="${contactDetail.nickName}"></span> )
+					</h3>
+
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">#ID</th>
+								<th scope="col">SCM<span th:text="${contactDetail.cid}"></span></th>
+
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr>
+								<th scope="row">Email Address</th>
+								<td><span th:text="${contactDetail.email}"></span></td>
+							</tr>
+
+							<tr>
+								<th scope="row">Phone</th>
+								<td><span th:text="${contactDetail.phone}"></span></td>
+							</tr>
+
+							<tr>
+								<th scope="row">Work</th>
+								<td><span th:text="${contactDetail.work}"></span></td>
+							</tr>
+
+						</tbody>
+					</table>
+
+					<div class="description">
+						<th:block th:text="${contactDetail.description}"></th:block>
+					</div>
+
+					<div class="buttons mt-3 btn-group">
+
+						<form method="post" th:action="@{'/user/update/'+${contactDetail.cid}}">
+							<button type="submit" class="btn btn-primary btn-sm">Update</button>
+							</form> 
+						 <a th:href="@{'/user/delete/'+${contactDetail.cid}}"
+							class="btn btn-danger btn-sm ml-3">Delete</a>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="text-center text-white bg-danger p-3 mr-4 ml-4"
+			style="border-radius: 0.5rem;" th:unless="${contactDetail}">
+			<h2>You don't have permission to see this Contact...</h2>
+		</div>
+	</section>
+</body>
+</html>

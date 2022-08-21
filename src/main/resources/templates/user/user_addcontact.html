@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+	th:replace="user/user_base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>Contact Page</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="mycard ml-5 mr-5 mb-4" style="border-radius: 0.5rem;">
+
+						<!-- message -->
+						<div class="container" th:if="${session.message}">
+
+							<div th:classappend="${'alert-'+session.message.type}"
+								class="alert text-center" role="alert">
+
+								<span th:text="${session.message.content}"></span>
+								<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+							</div>
+
+						</div>
+						<h1 class="text-center">Add Contact Form !!</h1>
+
+						<form id="contactForm" th:object="${contact}"
+							enctype="multipart/form-data" method="post"
+							th:action="@{/user/process_contact}">
+
+							<!-- Name input -->
+							<div class="mb-3">
+								<label class="form-label" for="name">Name</label> <input
+									required="required" class="form-control" id="name" type="text"
+									placeholder="Name" name="name" />
+							</div>
+
+							<!-- Nick Name input -->
+							<div class="mb-3">
+								<label class="form-label" for="emailAddress">Nick Name</label> <input
+									required="required" class="form-control" id="emailAddress"
+									type="text" placeholder="Nick Name" name="nickName" />
+							</div>
+
+							<!-- Work input -->
+							<div class="mb-3">
+								<label class="form-label" for="emailAddress">Work</label> <input
+									required="required" class="form-control" id="emailAddress"
+									type="text" placeholder="Work" name="work" />
+							</div>
+
+							<!-- Email Address  input -->
+							<div class="mb-3">
+								<label class="form-label" for="emailAddress">Email
+									Address</label> <input class="form-control" id="emailAddress"
+									required="required" type="email" placeholder="Email Address"
+									name="email" />
+							</div>
+
+							<!-- Description input -->
+							<div class="mb-3">
+								<label class="form-label" for="default">Description</label>
+								<textarea class="form-control" id="default" type="text"
+									required="required" placeholder="Description"
+									name="description" rows="5"></textarea>
+							</div>
+
+							<!-- Phone input -->
+							<div class="mb-3">
+								<label class="form-label" for="phone">Phone</label> <input
+									required="required" min="10" class="form-control" id="phone"
+									type="number" placeholder="Phone" name="phone" />
+							</div>
+
+							<!-- Image input -->
+							<div class="mb-3">
+								<input id="image" type="file" placeholder="Image"
+									name="profileImage" />
+							</div>
+
+							<!-- Form submit button -->
+							<div class="d-grid text-center">
+								<button class="btn btn-primary btn-lg " type="submit">Submit</button>
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+        $(document).ready(() => {
+            $(".item").removeClass("active");
+            $("#add-contacts").addClass("active");
+        });
+    </script>
+
+	</section>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+	th:replace="user/user_base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>Settings Page</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="card mr-4 ml-4" style="border-radius: 0.5rem;">
+				<div class="card-body my-4">
+					<div class="text-center mt-3 mb-5">
+					
+					<div class="container" th:if="${session.message}">
+
+							<div th:classappend="${'alert-'+session.message.type}"
+								class="alert text-center" role="alert">
+
+								<span th:text="${session.message.content}"></span>
+								<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+							</div>
+
+						</div>
+					
+						<h1>Change your Password</h1>
+					</div>
+					<form th:action="@{/user/password_change/}" method="post">
+
+						<!-- old password -->
+						<div class="form-group">
+							<input type="password" class="form-control" name="old"
+								placeholder="Enter your old password" />
+						</div>
+
+						<!-- new password -->
+						<div class="form-group">
+							<input type="password" class="form-control" name="new"
+								placeholder="Enter your new password" />
+						</div>
+
+						<div class="container text-center mt-4">
+
+							<button type="submit" class="btn btn-success">Change</button>
+							&nbsp;
+							<button type="reset" class="btn btn-warning">Reset</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script>
+		$(document).ready(() => {
+			$(".item").removeClass("active");
+			$("#settings").addClass("active");
+		});
+		</script>
+	</section>
+</body>
+</html>

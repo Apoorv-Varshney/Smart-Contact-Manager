@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>About Page</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="card m-4" style="border-radius: 0.5rem;">
+				<div class="card-body my-2">
+
+
+					<div class="container">
+						<img style="height: 350px; width: 600px; border-radius: 10%;"
+							th:src="@{/images/back.jpg}" alt="contact" class="mr-5" /> <img
+							style="height: 350px; width: 300px; border-radius: 10%;"
+							th:src="@{/images/personal.jpeg}" alt="contact" />
+					</div>
+					<h1 class="text-center font-italic mt-3">Smart Contact Manager</h1>
+
+					<h5 class="text-center font-italic mt-3 mb-3">This project is
+						for educational purpose only and is developed by Apoorv Varshney
+						using Spring boot, MySql, Hibernate, Java Technologies. Create and
+						manage your Contacts efficiently.</h5>
+
+					<h4 class="text-center">
+						<b>Source Code : </b><a
+							href="https://github.com/Apoorv-Varshney/Smart-Contact-Manager">Smart
+							Contact Manager</a>
+					</h4>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

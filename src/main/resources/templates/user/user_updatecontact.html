@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+	th:replace="user/user_base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>update Page</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="mycard ml-5 mr-5 mb-4" style="border-radius: 0.5rem;">
+						<div class="container" th:if="${session.message}">
+
+							<div th:classappend="${'alert-'+session.message.type}"
+								class="alert text-center" role="alert">
+
+								<span th:text="${session.message.content}"></span>
+								<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+							</div>
+
+						</div>
+						<h1 class="text-center">Update Contact Form !!</h1>
+
+						<form id="contactForm" th:object="${contact}"
+							enctype="multipart/form-data" method="post"
+							th:action="@{/user/process_update}">
+
+
+							<input type="hidden" th:value="${contact.cid}" name="cid" />
+
+							<!-- Name input -->
+							<div class="mb-3">
+								<label class="form-label" for="name">Name</label> <input
+									th:value="${contact.name}" required="required"
+									class="form-control" id="name" type="text" placeholder="Name"
+									name="name" />
+							</div>
+
+							<!-- Nick Name input -->
+							<div class="mb-3">
+								<label class="form-label" for="emailAddress">Nick Name</label> <input
+									th:value="${contact.nickName}" required="required"
+									class="form-control" id="emailAddress" type="text"
+									placeholder="Nick Name" name="nickName" />
+							</div>
+
+							<!-- Work input -->
+							<div class="mb-3">
+								<label class="form-label" for="emailAddress">Work</label> <input
+									th:value="${contact.work}" required="required"
+									class="form-control" id="emailAddress" type="text"
+									placeholder="Work" name="work" />
+							</div>
+
+							<!-- Email Address  input -->
+							<div class="mb-3">
+								<label class="form-label" for="emailAddress">Email
+									Address</label> <input class="form-control" id="emailAddress"
+									th:value="${contact.email}" required="required" type="email"
+									placeholder="Email Address" name="email" />
+							</div>
+
+							<!-- Description input -->
+							<div class="mb-3">
+								<label class="form-label" for="default">Description</label>
+								<textarea class="form-control" id="default" type="text"
+									th:text="${contact.description}" required="required"
+									placeholder="Description" name="description" rows="5"></textarea>
+							</div>
+
+							<!-- Phone input -->
+							<div class="mb-3">
+								<label class="form-label" for="phone">Phone</label> <input
+									th:value="${contact.phone}" required="required" min="10"
+									class="form-control" id="phone" type="number"
+									placeholder="Phone" name="phone" />
+							</div>
+
+							<div class="container text-center">
+								<img alt="contact" th:src="@{'/images/'+${contact.image}}"
+									style="height: 150px; width: 150px;">
+							</div>
+
+							<p>Choose New Profile Picture</p>
+							<!-- Image input -->
+							<div class="mb-3">
+								<input id="image" type="file" placeholder="Image"
+									name="profileImage" />
+							</div>
+
+							<!-- Form submit button -->
+							<div class="d-grid text-center">
+								<button class="btn btn-primary btn-lg " type="submit">Update</button>
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

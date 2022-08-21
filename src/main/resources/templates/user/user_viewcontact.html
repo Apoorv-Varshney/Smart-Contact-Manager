@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+	th:replace="user/user_base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>View Contact Page</title>
+</head>
+<body>
+	<section>
+
+		<div th:classappend="${'alert-'+session.message.type}"
+			class="alert text-center mr-4 ml-4" style="border-radius: 0.5rem;"
+			role="alert" th:if="${session.message}">
+
+			<span th:text="${session.message.content}"></span>
+			<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+		</div>
+
+		<div class="card mr-4 ml-4" style="border-radius: 0.5rem;">
+
+			<div class="card-body">
+				<h1 class="text-center">Your Contacts</h1>
+
+				<!-- search -->
+				<div class="search-container my-4">
+
+					<input onkeyup="search()" id="search-input" type="text"
+						class="form-control" placeholder="Search your Contacts" />
+
+					<div class="search-result">
+
+						<!-- result display here -->
+
+					</div>
+
+				</div>
+
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">#ID</th>
+								<th scope="col">Name</th>
+								<th scope="col">Email</th>
+								<th scope="col">Phone</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="c : ${contacts}">
+								<th scope="row" th:text="'SCM'+${c.cid}"></th>
+
+								<td><img class="profile_images"
+									th:src="@{'/images/'+${c.image}}" alt="contact" />&nbsp; <span
+									th:text="${c.name}"></span></td>
+
+								<td><a th:href="@{'/user/contact/'+${c.cid}}"><span
+										th:text="${c.email}"></span></a></td>
+								<td th:text="${c.phone}"></td>
+
+								<td>
+									<div class="container btn-group">
+										<form method="post" th:action="@{'/user/update/'+${c.cid}}">
+											<button type="submit" class="btn btn-primary btn-sm">Update</button>
+										</form>
+										<a th:href="@{'/user/delete/'+${c.cid}}"
+											class="btn btn-danger btn-sm ml-3">Delete</a>
+									</div>
+								</td>
+
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+				
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+
+						<li th:if="${currentPage != 0}" class="page-item"><a
+							class="page-link"
+							th:href="@{'/user/view_contact/'+${currentPage-1}}">Previous</a></li>
+
+						<li th:classappend="${currentPage == t-1 ? 'active':''}"
+							class="page-item" th:each="t : ${#numbers.sequence(1,totalPage)}">
+							<a class="page-link" th:href="@{'/user/view_contact/'+${t-1}}">
+								<span th:text="${t}"></span>
+						</a>
+						</li>
+
+						<li th:if="${currentPage+1 != totalPage}" class="page-item">
+							<a class="page-link"
+							th:href="@{'/user/view_contact/'+${currentPage+1}}">Next</a>
+						</li>
+					</ul>
+				</nav>
+
+			</div>
+		</div>
+		
+		<script>
+		$(document).ready(() => {
+			$(".item").removeClass("active");
+			$("#view-contacts").addClass("active");
+		});
+		</script>
+		
+	</section>
+</body>
+</html>

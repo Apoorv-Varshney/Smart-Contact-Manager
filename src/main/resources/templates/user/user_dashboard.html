@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+	th:replace="user/user_base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>Dashboard Page</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="card mr-4 ml-4" style="border-radius: 0.5rem;">
+				<div class="card-body my-4">
+				
+				<div class="container" th:if="${session.message}">
+
+							<div th:classappend="${'alert-'+session.message.type}"
+								class="alert text-center" role="alert">
+
+								<span th:text="${session.message.content}"></span>
+								<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+							</div>
+
+						</div>
+						
+					<div class="container text-center">
+						<img style="height: 250px; width: 250px; border-radius: 30%;"
+							th:src="@{/images/home.jpeg}" alt="contact" />
+					</div>
+					<h1 class="text-center font-italic mt-3">Start Adding your
+						Contacts on Cloud Now...</h1>
+
+					<h5 class="text-center font-italic mt-3 mb-3">This software has been made keeping in mind the new Java
+						Technologies and is up to best market standards and IT Industry.Developed by Apoorv Varshney.</h5>
+					<div class="text-center">
+						<a th:href="@{/user/addcontact}" class="btn btn-primary mt-3">Add
+							New Contact</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script>
+		$(document).ready(() => {
+			$(".item").removeClass("active");
+			$("#home").addClass("active");
+		});
+		</script>
+	</section>
+</body>
+</html>
