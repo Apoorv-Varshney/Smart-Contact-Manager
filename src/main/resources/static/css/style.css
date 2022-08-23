@@ -1,6 +1,6 @@
 body {
 	background: #e2e2e2;
-	font-family: cursive;
+	font-family: sans-serif;
 }
 
 .bg-primary {
@@ -37,6 +37,14 @@ body {
 		margin-left: 0% !important;
 	}
 }
+
+.responsive {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  max-width: 300px;
+}
+
 
 .sidebar {
 	width: 20%;
